@@ -11,7 +11,7 @@ export default function ChatInterface() {
     {
       id: '1',
       role: 'assistant',
-      content: 'Ciao! Sono l\'Assistente del Master EMMIO – Executive Master in Management of International Organizations (SDA Bocconi). Posso aiutarti con:\n\n• Struttura del Master (part-time 9 mesi, compatibile con lavoro full-time)\n• Competenze chiave per il sistema multilaterale (UN, IFI, IGO, ONG)\n• Moduli, ammissione, borse e opportunità professionali\n• Applicazioni pratiche a sfide gestionali quotidiane\n\n[Approfondisci il Master EMMIO →](https://www.sdabocconi.it/it/master-specialistici-full-time-executive/emmio)\n\nCome posso aiutarti?',
+      content: '### Benvenuto nell\'Assistente del Master EMMIO\n\n**Executive Master in Management of International Organizations**\n*SDA Bocconi School of Management*\n\n---\n\nSono qui per supportarti con informazioni su:\n\n**📚 Programma**\n• Struttura part-time 9 mesi (compatibile con impiego full-time)\n• 40 ECTS – Livello EQF 7\n• Moduli, faculty e metodologie didattiche\n\n**🌍 Competenze Chiave**\n• Gestione nel sistema multilaterale (UN, IFI, IGO, ONG)\n• Leadership per organizzazioni internazionali\n• Applicazioni pratiche a sfide gestionali quotidiane\n\n**💼 Ammissione & Opportunità**\n• Requisiti e processo di candidatura\n• Borse di studio e agevolazioni\n• Career opportunities post-master\n\n---\n\n[📖 Approfondisci il Master EMMIO →](https://www.sdabocconi.it/it/master-specialistici-full-time-executive/emmio)\n\n**Come posso aiutarti oggi?**',
       timestamp: new Date()
     }
   ])
