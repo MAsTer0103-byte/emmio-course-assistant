@@ -33,14 +33,19 @@ export default function Header({ onAuthChange }) {
       <header className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-rosa-500 to-rosa-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
-              EM
-            </div>
+            <img src="/sda-bocconi-logo.svg" alt="SDA Bocconi" className="h-12" />
             <div>
               <h1 className="text-xl font-bold text-gray-800">EMMIO – SDA Bocconi</h1>
               <p className="text-sm text-gray-500">Assistente del Master EMMIO</p>
             </div>
-            <img src="/sda-bocconi-logo.svg" alt="SDA Bocconi" className="h-8 hidden sm:block" />
+            <a
+              href="https://www.sdabocconi.it/it/master-specialistici-full-time-executive/emmio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-block text-kenya-500 hover:text-kenya-600 text-sm font-medium ml-4"
+            >
+              Approfondisci
+            </a>
           </div>
 
           <div className="flex items-center gap-4">
