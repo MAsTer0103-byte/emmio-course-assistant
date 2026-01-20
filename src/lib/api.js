@@ -64,9 +64,11 @@ export async function uploadFile(file, userId = 'user-001') {
       fileName: file.name,
       mimeType: file.type,
       fileSize: file.size,
-      fileData: base64.split(',')[1], // Rimuovi il prefixo data:mime;base64,
+      fileData: base64.split(',')[1], // Rimuovi il prefisso data:mime;base64,
       timestamp: new Date().toISOString()
     }
+
+    console.log('Upload payload:', { ...payload, fileData: '...' })
 
     const response = await fetch(UPLOAD_WEBHOOK, {
       method: 'POST',
@@ -80,8 +82,23 @@ export async function uploadFile(file, userId = 'user-001') {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    const data = await response.json()
-    return data
+    // Leggi la risposta come testo prima per debugging
+    const responseText = await response.text()
+    console.log('Upload response text:', responseText)
+    
+    // Tenta di parsare come JSON
+    try {
+      const data = JSON.parse(responseText)
+      return data
+    } catch (parseError) {
+      console.error('Failed to parse JSON response:', parseError)
+      // Se non è JSON valido, ritorna errore dettagliato
+      return {
+        success: false,
+        message: 'Risposta non valida dal webhook',
+        raw: responseText
+      }
+    }
   } catch (error) {
     console.error('Error uploading file:', error)
     throw error
