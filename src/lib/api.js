@@ -86,12 +86,23 @@ export async function uploadFile(file, userId = 'user-001') {
     const responseText = await response.text()
     console.log('Upload response text:', responseText)
     
+    // Se la risposta è vuota, ritorna successo con default
+    if (!responseText || responseText.trim() === '') {
+      console.warn('Webhook returned empty response')
+      return {
+        success: true,
+        message: 'File caricato (risposta webhook vuota)',
+        fileName: file.name
+      }
+    }
+    
     // Tenta di parsare come JSON
     try {
       const data = JSON.parse(responseText)
       return data
     } catch (parseError) {
       console.error('Failed to parse JSON response:', parseError)
+      console.error('Response was:', responseText)
       // Se non è JSON valido, ritorna errore dettagliato
       return {
         success: false,
