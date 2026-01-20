@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-[#0f172a] to-[#111827] font-sans antialiased text-gray-100;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply rounded-2xl px-4 py-3 max-w-[80%] break-words shadow-lg;
+  }
+  
+  .chat-bubble-user {
+    @apply ml-auto bg-gradient-to-r from-rosa-500 to-rosa-600 text-white shadow;
+  }
+  
+  .chat-bubble-ai {
+    @apply mr-auto bg-white text-gray-800 border border-gray-200;
+  }
+  
+    /* Markdown styling inside AI bubbles */
+    .chat-bubble-ai h2, .chat-bubble-ai h3, .chat-bubble-ai h4 {
+      letter-spacing: 0.5px;
+    }
+    .chat-bubble-ai p:last-child { margin-bottom: 0; }
+    .chat-bubble-ai table { border-collapse: collapse; }
+    .chat-bubble-ai a { color: #db2777; text-decoration: underline; }
+    .chat-bubble-ai code { background:#f3f4f6; padding:2px 4px; border-radius:4px; font-size:0.85rem; }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-rosa-500 to-rosa-600 hover:from-rosa-600 hover:to-rosa-700 text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-kenya-500 to-kenya-600 hover:from-kenya-600 hover:to-kenya-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-rosa-500 focus:border-transparent;
+  }
+}
