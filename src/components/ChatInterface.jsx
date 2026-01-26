@@ -166,7 +166,7 @@ export default function ChatInterface() {
                 setAutoScrollEnabled(true)
                 endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
               }}
-              className="pointer-events-auto px-4 py-2 text-sm rounded-full bg-white shadow border border-gray-200 hover:bg-gray-50"
+              className="pointer-events-auto px-4 py-2 text-sm font-medium rounded-full bg-white/95 text-gray-800 shadow-lg border border-gray-300 backdrop-blur hover:bg-white"
             >
               Vai all'ultimo messaggio
             </button>
