@@ -19,6 +19,10 @@ export default function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false)
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true)
 
+  const updateMessageStatus = (id, status) => {
+    setMessages(prev => prev.map(msg => msg.id === id ? { ...msg, status } : msg))
+  }
+
   // Rileva se l'utente sta scorrendo manualmente: abilita autoscroll solo se vicino al fondo
   const handleScroll = () => {
     const el = listRef.current
@@ -45,11 +49,13 @@ export default function ChatInterface() {
     
     if (!inputValue.trim() || isLoading) return
 
+    const userMessageId = Date.now().toString()
     const userMessage = {
-      id: Date.now().toString(),
+      id: userMessageId,
       role: 'user',
       content: inputValue.trim(),
-      timestamp: new Date()
+      timestamp: new Date(),
+      status: 'sending'
     }
 
     setMessages(prev => [...prev, userMessage])
@@ -59,6 +65,7 @@ export default function ChatInterface() {
     try {
       const response = await sendChatMessage(userMessage.content)
       console.log('Received response:', response)
+      updateMessageStatus(userMessageId, 'sent')
       
       const aiMessage = {
         id: (Date.now() + 1).toString(),
@@ -73,6 +80,7 @@ export default function ChatInterface() {
       setAutoScrollEnabled(false)
     } catch (error) {
       console.error('Chat error:', error)
+      updateMessageStatus(userMessageId, 'error')
       const errorMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -141,6 +149,13 @@ export default function ChatInterface() {
                   minute: '2-digit' 
                 })}
               </span>
+              {msg.role === 'user' && msg.status && (
+                <span className="text-[11px] mt-0.5 block text-white/80">
+                  {msg.status === 'sent' && 'Inviato'}
+                  {msg.status === 'sending' && 'Invio...'}
+                  {msg.status === 'error' && 'Errore invio'}
+                </span>
+              )}
             </div>
           </div>
         ))}

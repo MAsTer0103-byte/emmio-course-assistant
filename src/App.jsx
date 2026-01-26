@@ -17,7 +17,7 @@ function App() {
         <div className="flex gap-2 mb-6 bg-white/70 backdrop-blur rounded-xl p-1 shadow-lg border border-white/50">
           <button
             onClick={() => setActiveTab('chat')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-3 rounded-lg font-medium transition-colors ${
               activeTab === 'chat'
                 ? 'bg-gradient-to-r from-rosa-500 to-rosa-600 text-white shadow'
                 : 'text-gray-700 hover:bg-white/80'
@@ -30,7 +30,7 @@ function App() {
 
           <button
             onClick={() => setActiveTab('upload')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-3 rounded-lg font-medium transition-colors ${
               activeTab === 'upload'
                 ? 'bg-gradient-to-r from-kenya-500 to-kenya-600 text-white shadow'
                 : 'text-gray-700 hover:bg-white/80'
