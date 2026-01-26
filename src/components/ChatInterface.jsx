@@ -67,7 +67,10 @@ export default function ChatInterface() {
         timestamp: new Date()
       }
 
+      // Non auto-scorrere alla fine quando arriva la risposta AI,
+      // così l'utente resta all'inizio del messaggio generato.
       setMessages(prev => [...prev, aiMessage])
+      setAutoScrollEnabled(false)
     } catch (error) {
       console.error('Chat error:', error)
       const errorMessage = {
