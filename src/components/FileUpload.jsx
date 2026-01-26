@@ -7,6 +7,7 @@ export default function FileUpload() {
   const [uploading, setUploading] = useState(false)
   const [uploadStatus, setUploadStatus] = useState(null) // 'success' | 'error' | null
   const [uploadMessage, setUploadMessage] = useState('')
+  const [toast, setToast] = useState(null)
 
   const acceptedTypes = {
     'application/pdf': '.pdf',
@@ -37,6 +38,7 @@ export default function FileUpload() {
       if (response.success) {
         setUploadStatus('success')
         setUploadMessage(response.message || 'File caricato con successo!')
+        setToast({ type: 'success', message: response.message || 'File caricato con successo!' })
         setTimeout(() => {
           setFile(null)
           setUploadStatus(null)
@@ -46,7 +48,9 @@ export default function FileUpload() {
       }
     } catch (error) {
       setUploadStatus('error')
-      setUploadMessage(error.message || 'Errore durante il caricamento del file')
+      const msg = error.message || 'Errore durante il caricamento del file'
+      setUploadMessage(msg)
+      setToast({ type: 'error', message: msg })
     } finally {
       setUploading(false)
     }
@@ -164,6 +168,26 @@ export default function FileUpload() {
           Supabase per migliorare le risposte dell'assistente.
         </p>
       </div>
+
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <div className={`rounded-lg px-4 py-3 shadow-lg border text-sm flex items-start gap-2 max-w-sm ${
+            toast.type === 'error'
+              ? 'bg-red-50 border-red-200 text-red-800'
+              : 'bg-green-50 border-green-200 text-green-800'
+          }`}>
+            <span className="font-semibold">{toast.type === 'error' ? 'Errore' : 'OK'}</span>
+            <span className="leading-snug">{toast.message}</span>
+            <button
+              onClick={() => setToast(null)}
+              className="ml-auto text-xs text-gray-500 hover:text-gray-700"
+            >
+              Chiudi
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

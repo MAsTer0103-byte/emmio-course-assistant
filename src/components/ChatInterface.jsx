@@ -18,6 +18,7 @@ export default function ChatInterface() {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true)
+  const [toast, setToast] = useState(null)
 
   const updateMessageStatus = (id, status) => {
     setMessages(prev => prev.map(msg => msg.id === id ? { ...msg, status } : msg))
@@ -81,6 +82,7 @@ export default function ChatInterface() {
     } catch (error) {
       console.error('Chat error:', error)
       updateMessageStatus(userMessageId, 'error')
+      setToast({ type: 'error', message: 'Invio chat fallito. Riprova.' })
       const errorMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -210,6 +212,26 @@ export default function ChatInterface() {
           </button>
         </div>
       </form>
+
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <div className={`rounded-lg px-4 py-3 shadow-lg border text-sm flex items-start gap-2 max-w-sm ${
+            toast.type === 'error'
+              ? 'bg-red-50 border-red-200 text-red-800'
+              : 'bg-green-50 border-green-200 text-green-800'
+          }`}>
+            <span className="font-semibold">{toast.type === 'error' ? 'Errore' : 'OK'}</span>
+            <span className="leading-snug">{toast.message}</span>
+            <button
+              onClick={() => setToast(null)}
+              className="ml-auto text-xs text-gray-500 hover:text-gray-700"
+            >
+              Chiudi
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
